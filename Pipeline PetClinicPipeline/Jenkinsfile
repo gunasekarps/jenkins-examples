@@ -1,0 +1,22 @@
+node {
+   
+   stage('initial')
+   {
+        git 'https://github.com/savishy/spring-petclinic.git'
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/savishy/spring-petclinic.git']]])
+   }
+   stage('Build') {
+      // Run the maven build
+      
+        sh './mvnw install'
+      }
+      stage('ARCHIEVE') {
+      
+      archive '**/*.war'
+   }
+  
+   
+   
+   
+   
+}
